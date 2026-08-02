@@ -1,0 +1,11 @@
+name: bookmyspace
+repository: https://github.com/bookmyspace/bookmyspace
+
+packages:
+  - apps/**
+  - packages/**
+
+command:
+  bootstrap: melos bootstrap
+  analyze: melos exec -- flutter analyze
+  test: melos exec --dir-exists=test -- flutter test

@@ -1,0 +1,69 @@
+# .gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+!**/*.env.example
+*.pem
+*.p12
+google-services.json
+GoogleService-Info.plist
+**/secrets/
+
+# Java / Gradle
+.gradle/
+**/build/
+!docs/**/build/
+out/
+*.class
+*.jar
+*.war
+hs_err_pid*
+
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+**/build/
+**/coverage/
+*.iml
+.flutter-plugins
+.flutter-plugins-dependencies
+**/doc/api/
+
+# Node
+node_modules/
+.next/
+.nuxt/
+dist/
+.turbo/
+*.log
+npm-debug.log*
+
+# Docker
+docker-data/
+
+# Test / coverage
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# Misc
+*.swp
+*.swo
+*~

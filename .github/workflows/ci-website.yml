@@ -1,0 +1,23 @@
+name: CI Website
+
+on:
+  pull_request:
+    paths:
+      - "apps/website/**"
+      - ".github/workflows/ci-website.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/website/**"
+      - ".github/workflows/ci-website.yml"
+
+jobs:
+  placeholder:
+    name: Website placeholder check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure README exists (framework TBD)
+        run: |
+          test -f apps/website/README.md
+          echo "Website SSR framework not scaffolded yet (ADR-002). Placeholder OK."

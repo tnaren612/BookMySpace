@@ -1,0 +1,71 @@
+name: CI Flutter
+
+on:
+  pull_request:
+    paths:
+      - "apps/customer_flutter/**"
+      - "apps/owner_flutter/**"
+      - "apps/admin_web/**"
+      - "packages/shared_ui/**"
+      - "packages/shared_models/**"
+      - "packages/common_utils/**"
+      - ".github/workflows/ci-flutter.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/customer_flutter/**"
+      - "apps/owner_flutter/**"
+      - "apps/admin_web/**"
+      - "packages/shared_ui/**"
+      - "packages/shared_models/**"
+      - "packages/common_utils/**"
+      - ".github/workflows/ci-flutter.yml"
+
+jobs:
+  analyze-and-test:
+    name: Analyze & test Flutter apps
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - apps/customer_flutter
+          - apps/owner_flutter
+          - apps/admin_web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Pub get
+        working-directory: ${{ matrix.app }}
+        run: flutter pub get
+      - name: Analyze
+        working-directory: ${{ matrix.app }}
+        run: flutter analyze
+      - name: Test
+        working-directory: ${{ matrix.app }}
+        run: flutter test
+
+  packages:
+    name: Analyze shared packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: shared_ui
+        working-directory: packages/shared_ui
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+      - name: shared_models
+        working-directory: packages/shared_models
+        run: dart pub get && dart analyze
+      - name: common_utils
+        working-directory: packages/common_utils
+        run: dart pub get && dart analyze
