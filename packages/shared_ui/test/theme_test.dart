@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -10,5 +11,17 @@ void main() {
 
   testWidgets('spacing tokens are positive', (tester) async {
     expect(AppSpacing.md, greaterThan(0));
+  });
+
+  testWidgets('AppPrimaryButton renders label', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.light(),
+        home: Scaffold(
+          body: AppPrimaryButton(label: 'Continue', onPressed: () {}),
+        ),
+      ),
+    );
+    expect(find.text('Continue'), findsOneWidget);
   });
 }
